@@ -69,8 +69,12 @@ const Sagas = () => {
         <div className="container" style={{ position: 'relative', minHeight: '80vh' }}>
             <header className="flex items-center justify-between" style={{ marginBottom: '2rem' }}>
                 <div>
-                    <h2 className="page-title">📚 Mis Sagas</h2>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Organiza tus libros en colecciones</p>
+                    <h2 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '12px', margin: 0 }}>
+                        <div style={{ padding: '8px', backgroundColor: 'var(--bg-tertiary)', borderRadius: '12px', display: 'flex' }}>
+                            <Layers size={28} style={{ color: 'var(--accent-primary)' }} />
+                        </div>
+                        Sagas
+                    </h2>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <span style={{ color: 'var(--text-secondary)' }}>{sagas.length} colecciones</span>

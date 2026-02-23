@@ -9,6 +9,18 @@ const api = axios.create({
     }
 });
 
+// Función para interceptar peticiones y añadir el token
+api.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+
 // Función para subir imágenes
 export const uploadImage = async (file) => {
     const formData = new FormData();

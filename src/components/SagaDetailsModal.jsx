@@ -7,7 +7,6 @@ const SagaDetailsModal = ({ isOpen, onClose, saga, onUpdate, onDelete }) => {
     const modalRef = useRef();
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({});
-    const [showCoverMenu, setShowCoverMenu] = useState(false);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -143,71 +142,24 @@ const SagaDetailsModal = ({ isOpen, onClose, saga, onUpdate, onDelete }) => {
                                     justifyContent: 'center',
                                     transition: 'background-color 0.2s'
                                 }}>
-                                    {!showCoverMenu ? (
-                                        <button
-                                            onClick={(e) => { e.stopPropagation(); setShowCoverMenu(true); }}
-                                            className="btn-primary"
-                                            style={{
-                                                borderRadius: '50%',
-                                                width: '32px',
-                                                height: '32px',
-                                                padding: 0,
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                boxShadow: '0 4px 6px rgba(0,0,0,0.3)'
-                                            }}
-                                            title="Cambiar portada"
-                                        >
-                                            <Edit2 size={16} />
-                                        </button>
-                                    ) : (
-                                        <div style={{
-                                            backgroundColor: 'rgba(0,0,0,0.8)',
-                                            borderRadius: 'var(--radius-sm)',
-                                            padding: '0.5rem',
+                                    <label
+                                        className="btn-primary"
+                                        style={{
+                                            borderRadius: '50%',
+                                            width: '32px',
+                                            height: '32px',
+                                            padding: 0,
                                             display: 'flex',
-                                            flexDirection: 'column',
-                                            gap: '0.5rem',
-                                            width: '95%',
-                                            position: 'relative',
-                                            alignItems: 'center'
-                                        }}>
-                                            <button
-                                                onClick={(e) => { e.stopPropagation(); setShowCoverMenu(false); }}
-                                                style={{
-                                                    position: 'absolute',
-                                                    top: '-8px',
-                                                    right: '-8px',
-                                                    background: 'red',
-                                                    color: 'white',
-                                                    borderRadius: '50%',
-                                                    width: '20px',
-                                                    height: '20px',
-                                                    border: 'none',
-                                                    cursor: 'pointer',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                    zIndex: 10
-                                                }}
-                                            >
-                                                <X size={12} />
-                                            </button>
-                                            <label className="btn-primary" style={{ cursor: 'pointer', padding: '4px', borderRadius: '50%' }}>
-                                                <Upload size={16} />
-                                                <input type="file" hidden onChange={handleFileUpload} accept="image/*" />
-                                            </label>
-                                            <input
-                                                className="input-field"
-                                                value={formData.coverUrl}
-                                                onChange={e => setFormData({ ...formData, coverUrl: e.target.value })}
-                                                placeholder="URL..."
-                                                style={{ width: '100%', fontSize: '0.7rem', padding: '2px 4px', height: 'auto' }}
-                                                onClick={e => e.stopPropagation()}
-                                            />
-                                        </div>
-                                    )}
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
+                                            cursor: 'pointer'
+                                        }}
+                                        title="Subir portada"
+                                    >
+                                        <input type="file" style={{ display: 'none' }} onChange={handleFileUpload} accept="image/*" />
+                                        <Upload size={16} />
+                                    </label>
                                 </div>
                             )}
                         </div>

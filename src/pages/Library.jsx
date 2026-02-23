@@ -159,7 +159,12 @@ function Library() {
     return (
         <div className="container" style={{ position: 'relative', minHeight: '80vh' }}>
             <header className="flex items-center justify-between" style={{ marginBottom: '2rem' }}>
-                <h2 className="page-title">📚 Mi Colección</h2>
+                <h2 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '12px', margin: 0 }}>
+                    <div style={{ padding: '8px', backgroundColor: 'var(--bg-tertiary)', borderRadius: '12px', display: 'flex' }}>
+                        <BookOpen size={28} style={{ color: 'var(--accent-primary)' }} />
+                    </div>
+                    Libros
+                </h2>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <span style={{ color: 'var(--text-secondary)' }}>{books.length} libros</span>
                     <button
@@ -450,10 +455,21 @@ function Library() {
             {filteredBooks.length === 0 ? (
                 <div className="card" style={{ textAlign: 'center', padding: '3rem' }}>
                     <Book size={48} style={{ color: 'var(--text-muted)', marginBottom: '1rem' }} />
-                    <p>No se encontraron libros con estos filtros.</p>
-                    <button onClick={() => { setFilter('ALL'); setFilterGenre('ALL'); setFilterAuthor('ALL'); }} className="btn-primary" style={{ marginTop: '1rem' }}>
-                        Limpiar Filtros
-                    </button>
+                    <p>
+                        {filter === 'ALL' && filterGenre === 'ALL' && filterAuthor === 'ALL'
+                            ? 'Aún no tienes libros en tu colección.'
+                            : 'No se encontraron libros con estos filtros.'
+                        }
+                    </p>
+                    {filter === 'ALL' && filterGenre === 'ALL' && filterAuthor === 'ALL' ? (
+                        <button onClick={() => setIsSearchOpen(true)} className="btn-primary" style={{ marginTop: '1rem' }}>
+                            Añadir Libro
+                        </button>
+                    ) : (
+                        <button onClick={() => { setFilter('ALL'); setFilterGenre('ALL'); setFilterAuthor('ALL'); }} className="btn-primary" style={{ marginTop: '1rem' }}>
+                            Limpiar Filtros
+                        </button>
+                    )}
                 </div>
             ) : (
                 <div className="responsive-grid">
