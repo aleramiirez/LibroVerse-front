@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-// TRUCO PRO: window.location.hostname coge la IP exacta desde la que estás navegando.
-// Así funciona tanto en "localhost" (PC) como en "192.168.X.X" (Móvil).
+const API_URL = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:8080/api`;
+
 const api = axios.create({
-    baseURL: `http://${window.location.hostname}:8080/api`,
+    baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json',
     }
