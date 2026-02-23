@@ -1,8 +1,11 @@
-import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, BookOpen, LogOut, ChevronLeft, ChevronRight, X, Layers } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, BookOpen, LogOut, ChevronLeft, ChevronRight, X, Layers, User } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const Sidebar = ({ isOpen, isCollapsed, toggleCollapse, closeMobileSidebar }) => {
     const location = useLocation();
+    const navigate = useNavigate();
+    const { user, logout } = useAuth();
 
     const menuItems = [
         { path: '/', label: 'Inicio', icon: LayoutDashboard },
@@ -167,18 +170,44 @@ const Sidebar = ({ isOpen, isCollapsed, toggleCollapse, closeMobileSidebar }) =>
                         {!isCollapsed && <span>Contraer</span>}
                     </button>
 
-                    <button style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: isCollapsed ? 'center' : 'flex-start',
-                        gap: '12px',
-                        color: 'var(--text-muted)',
-                        width: '100%',
-                        padding: '12px',
-                        textAlign: 'left'
-                    }}>
-                        <LogOut size={20} />
-                        {!isCollapsed && <span>Cerrar Sesión</span>}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '1rem', padding: '12px', borderRadius: 'var(--radius-sm)', backgroundColor: 'var(--bg-tertiary)' }}>
+                        <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
+                            <User size={18} />
+                        </div>
+                        {!isCollapsed && (
+                            <div style={{ flex: 1, minWidth: 0 }}>
+                                <div style={{ color: 'var(--text-primary)', fontSize: '0.9rem', fontWeight: 'bold', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                    {user?.name || 'Usuario'}
+                                </div>
+                                <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                    {user?.email || ''}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    <button
+                        onClick={() => { logout(); navigate('/login'); }}
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: isCollapsed ? 'center' : 'flex-start',
+                            gap: '12px',
+                            color: 'var(--text-muted)',
+                            width: '100%',
+                            padding: '12px',
+                            textAlign: 'left',
+                            borderRadius: 'var(--radius-sm)',
+                            cursor: 'pointer',
+                            transition: 'background-color 0.2s ease',
+                            border: 'none',
+                            background: 'transparent'
+                        }}
+                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)'}
+                        onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                    >
+                        <LogOut size={20} style={{ color: '#ef4444' }} />
+                        {!isCollapsed && <span style={{ color: '#ef4444' }}>Cerrar Sesión</span>}
                     </button>
                 </div>
             </aside>
