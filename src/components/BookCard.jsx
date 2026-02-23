@@ -15,7 +15,8 @@ const BookCard = ({ title, author, coverUrl, genres, onClick }) => {
             onClick={onClick}
         >
             <div style={{
-                height: '200px',
+                aspectRatio: '2 / 3',
+                width: '100%',
                 backgroundColor: 'var(--bg-tertiary)',
                 display: 'flex',
                 alignItems: 'center',

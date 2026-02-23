@@ -13,7 +13,6 @@ const BookDetailsModal = ({ isOpen, onClose, book, onUpdate, onDelete, onOpenSag
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({});
     const [sagas, setSagas] = useState([]);
-    const [showCoverMenu, setShowCoverMenu] = useState(false);
 
     useEffect(() => {
         if (isOpen) {
@@ -190,69 +189,24 @@ const BookDetailsModal = ({ isOpen, onClose, book, onUpdate, onDelete, onOpenSag
                                 justifyContent: 'center',
                                 transition: 'background-color 0.2s'
                             }}>
-                                {!showCoverMenu ? (
-                                    <button
-                                        onClick={(e) => { e.stopPropagation(); setShowCoverMenu(true); }}
-                                        className="btn-primary"
-                                        style={{
-                                            borderRadius: '50%',
-                                            width: '40px',
-                                            height: '40px',
-                                            padding: 0,
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            boxShadow: '0 4px 6px rgba(0,0,0,0.3)'
-                                        }}
-                                        title="Cambiar portada"
-                                    >
-                                        <Edit2 size={20} />
-                                    </button>
-                                ) : (
-                                    <div style={{
-                                        backgroundColor: 'rgba(0,0,0,0.8)',
-                                        borderRadius: 'var(--radius-sm)',
-                                        padding: '1rem',
+                                <label
+                                    className="btn-primary"
+                                    style={{
+                                        borderRadius: '50%',
+                                        width: '40px',
+                                        height: '40px',
+                                        padding: 0,
                                         display: 'flex',
-                                        flexDirection: 'column',
-                                        gap: '0.75rem',
-                                        width: '90%',
-                                        position: 'relative'
-                                    }}>
-                                        <button
-                                            onClick={(e) => { e.stopPropagation(); setShowCoverMenu(false); }}
-                                            style={{
-                                                position: 'absolute',
-                                                top: '-10px',
-                                                right: '-10px',
-                                                background: 'red',
-                                                color: 'white',
-                                                borderRadius: '50%',
-                                                width: '24px',
-                                                height: '24px',
-                                                border: 'none',
-                                                cursor: 'pointer',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center'
-                                            }}
-                                        >
-                                            <X size={14} />
-                                        </button>
-                                        <label className="btn-primary" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '0.85rem', width: '100%' }}>
-                                            <Upload size={16} /> Subir Imagen
-                                            <input type="file" hidden onChange={handleFileUpload} accept="image/*" />
-                                        </label>
-                                        <input
-                                            className="input-field"
-                                            value={formData.coverUrl}
-                                            onChange={e => setFormData({ ...formData, coverUrl: e.target.value })}
-                                            placeholder="Pegar URL..."
-                                            style={{ fontSize: '0.8rem', padding: '0.5rem', width: '100%' }}
-                                            onClick={e => e.stopPropagation()}
-                                        />
-                                    </div>
-                                )}
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
+                                        cursor: 'pointer'
+                                    }}
+                                    title="Subir portada"
+                                >
+                                    <input type="file" style={{ display: 'none' }} onChange={handleFileUpload} accept="image/*" />
+                                    <Upload size={20} />
+                                </label>
                             </div>
                         )}
                     </div>

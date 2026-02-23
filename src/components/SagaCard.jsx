@@ -77,27 +77,43 @@ const SagaCard = ({ saga, onClick }) => {
                 </div>
             </div>
 
-            <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.2rem', flex: 1 }}>
-
-                {/* Stats */}
-                <div style={{ display: 'flex', justifyContent: 'flex-end', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>
-                    <span>{finishedBooks} / {totalBooks}</span>
+            <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', flex: 1, backgroundColor: 'var(--bg-secondary)' }}>
+                {/* Progress Header */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
+                        Progreso
+                    </span>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', backgroundColor: 'var(--bg-tertiary)', padding: '2px 8px', borderRadius: '12px' }}>
+                        {finishedBooks} / {totalBooks}
+                    </span>
                 </div>
 
-                {/* Progress Bar */}
+                {/* Progress Bar Container */}
                 <div style={{
                     width: '100%',
-                    height: '6px',
+                    height: '10px',
                     backgroundColor: 'var(--bg-tertiary)',
-                    borderRadius: '3px',
-                    overflow: 'hidden'
+                    borderRadius: '5px',
+                    overflow: 'hidden',
+                    boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.2)',
+                    position: 'relative'
                 }}>
+                    {/* Progress Fill */}
                     <div style={{
                         width: `${progress}%`,
                         height: '100%',
-                        backgroundColor: progress === 100 ? '#10b981' : 'var(--accent-primary)',
-                        transition: 'width 0.5s ease'
+                        background: progress === 100
+                            ? 'linear-gradient(90deg, #10b981, #34d399)'
+                            : 'linear-gradient(90deg, var(--accent-primary), #8b5cf6)',
+                        borderRadius: '5px',
+                        transition: 'width 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+                        boxShadow: progress > 0 ? '0 0 10px rgba(139, 92, 246, 0.5)' : 'none'
                     }} />
+                </div>
+
+                {/* Percentage */}
+                <div style={{ textAlign: 'right', fontSize: '0.75rem', color: progress === 100 ? '#10b981' : 'var(--text-muted)' }}>
+                    {Math.round(progress)}% Completado
                 </div>
             </div>
         </div>

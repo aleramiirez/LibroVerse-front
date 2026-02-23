@@ -159,7 +159,12 @@ function Library() {
     return (
         <div className="container" style={{ position: 'relative', minHeight: '80vh' }}>
             <header className="flex items-center justify-between" style={{ marginBottom: '2rem' }}>
-                <h2 className="page-title">📚 Mi Colección</h2>
+                <h2 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '12px', margin: 0 }}>
+                    <div style={{ padding: '8px', backgroundColor: 'var(--bg-tertiary)', borderRadius: '12px', display: 'flex' }}>
+                        <BookOpen size={28} style={{ color: 'var(--accent-primary)' }} />
+                    </div>
+                    Libros
+                </h2>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <span style={{ color: 'var(--text-secondary)' }}>{books.length} libros</span>
                     <button

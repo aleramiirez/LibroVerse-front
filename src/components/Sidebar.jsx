@@ -5,7 +5,7 @@ const Sidebar = ({ isOpen, isCollapsed, toggleCollapse, closeMobileSidebar }) =>
     const location = useLocation();
 
     const menuItems = [
-        { path: '/', label: 'Dashboard', icon: LayoutDashboard },
+        { path: '/', label: 'Inicio', icon: LayoutDashboard },
         { path: '/biblioteca', label: 'Mi Colección', icon: BookOpen },
         { path: '/sagas', label: 'Mis Sagas', icon: Layers },
     ];
