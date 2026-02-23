@@ -4,8 +4,7 @@ import Dashboard from './pages/Dashboard';
 import Search from './pages/Search';
 import Library from './pages/Library';
 import Sagas from './pages/Sagas';
-import Login from './pages/Login';
-import Register from './pages/Register';
+import AuthPage from './pages/AuthPage';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -15,8 +14,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* Rutas Públicas */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<AuthPage />} />
+          <Route path="/register" element={<AuthPage />} />
 
           {/* Rutas Privadas */}
           <Route path="/*" element={
