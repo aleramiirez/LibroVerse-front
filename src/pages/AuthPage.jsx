@@ -53,9 +53,21 @@ const AuthPage = () => {
         }
     };
 
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    };
+
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
         setRegError('');
+
+        if (!validateEmail(regEmail)) {
+            setRegError('Por favor, introduce un correo electrónico válido');
+            return;
+        }
+
         setRegLoading(true);
         try {
             await register(regName, regEmail, regPassword);
@@ -210,9 +222,9 @@ const AuthPage = () => {
                             </form>
 
                             <div style={{ marginTop: '1.5rem', fontSize: '0.9rem', color: 'var(--text-primary)', textAlign: 'center' }}>
-                                <button onClick={handleToggle} style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 'bold', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                                ¿Aún no tienes cuenta? <button onClick={handleToggle} style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 'bold', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
                                     onMouseOver={e => e.target.style.textDecoration = 'underline'} onMouseOut={e => e.target.style.textDecoration = 'none'}
-                                >Registrarse</button>
+                                >Regístrate</button>
                             </div>
                         </div>
 
