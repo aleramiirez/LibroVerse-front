@@ -4,19 +4,36 @@ import Dashboard from './pages/Dashboard';
 import Search from './pages/Search';
 import Library from './pages/Library';
 import Sagas from './pages/Sagas';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout>
+    <AuthProvider>
+      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/biblioteca" element={<Library />} />
-          <Route path="/sagas" element={<Sagas />} />
-          <Route path="/buscar" element={<Search />} />
+          {/* Rutas Públicas */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          {/* Rutas Privadas */}
+          <Route path="/*" element={
+            <ProtectedRoute>
+              <Layout>
+                <Routes>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/biblioteca" element={<Library />} />
+                  <Route path="/sagas" element={<Sagas />} />
+                  <Route path="/buscar" element={<Search />} />
+                </Routes>
+              </Layout>
+            </ProtectedRoute>
+          } />
         </Routes>
-      </Layout>
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
