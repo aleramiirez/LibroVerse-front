@@ -455,10 +455,21 @@ function Library() {
             {filteredBooks.length === 0 ? (
                 <div className="card" style={{ textAlign: 'center', padding: '3rem' }}>
                     <Book size={48} style={{ color: 'var(--text-muted)', marginBottom: '1rem' }} />
-                    <p>No se encontraron libros con estos filtros.</p>
-                    <button onClick={() => { setFilter('ALL'); setFilterGenre('ALL'); setFilterAuthor('ALL'); }} className="btn-primary" style={{ marginTop: '1rem' }}>
-                        Limpiar Filtros
-                    </button>
+                    <p>
+                        {filter === 'ALL' && filterGenre === 'ALL' && filterAuthor === 'ALL'
+                            ? 'Aún no tienes libros en tu colección.'
+                            : 'No se encontraron libros con estos filtros.'
+                        }
+                    </p>
+                    {filter === 'ALL' && filterGenre === 'ALL' && filterAuthor === 'ALL' ? (
+                        <button onClick={() => setIsSearchOpen(true)} className="btn-primary" style={{ marginTop: '1rem' }}>
+                            Añadir Libro
+                        </button>
+                    ) : (
+                        <button onClick={() => { setFilter('ALL'); setFilterGenre('ALL'); setFilterAuthor('ALL'); }} className="btn-primary" style={{ marginTop: '1rem' }}>
+                            Limpiar Filtros
+                        </button>
+                    )}
                 </div>
             ) : (
                 <div className="responsive-grid">
