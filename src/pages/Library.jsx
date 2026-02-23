@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getAllBooks, startReadingBook, finishReadingBook, updateBook, deleteBook } from '../services/bookService';
-import { Book, Play, CheckCircle, Star, Plus, Tag, BookOpen, Layers, ChevronDown } from 'lucide-react';
+import { Book, Play, CheckCircle, Star, Plus, Tag, BookOpen, Layers, ChevronDown, User } from 'lucide-react';
 import BookSearchModal from '../components/BookSearchModal';
 import BookDetailsModal from '../components/BookDetailsModal';
 import SagaDetailsModal from '../components/SagaDetailsModal'; // Imported
@@ -274,7 +274,7 @@ function Library() {
                                 top: 'calc(100% + 8px)',
                                 left: 0,
                                 minWidth: '200px',
-                                backgroundColor: 'var(--card-bg)',
+                                backgroundColor: 'var(--bg-primary, #1e293b)', // ensure opaque
                                 border: '1px solid var(--border-color)',
                                 borderRadius: '12px',
                                 boxShadow: 'var(--shadow-lg)',
@@ -288,7 +288,8 @@ function Library() {
                                     onClick={(e) => { e.stopPropagation(); setFilterGenre('ALL'); setOpenGenreDropdown(false); }}
                                     className="dropdown-item"
                                     style={{
-                                        padding: '8px 12px',
+                                        padding: '6px 12px',
+                                        marginBottom: '2px',
                                         borderRadius: '8px',
                                         cursor: 'pointer',
                                         fontSize: '0.9rem',
@@ -305,7 +306,8 @@ function Library() {
                                         onClick={(e) => { e.stopPropagation(); setFilterGenre(g); setOpenGenreDropdown(false); }}
                                         className="dropdown-item"
                                         style={{
-                                            padding: '8px 12px',
+                                            padding: '6px 12px',
+                                            marginBottom: '2px',
                                             borderRadius: '8px',
                                             cursor: 'pointer',
                                             fontSize: '0.9rem',
@@ -352,7 +354,7 @@ function Library() {
                                 gap: '8px'
                             }}
                         >
-                            <span style={{ fontSize: '1rem', lineHeight: 1, position: 'absolute', left: '12px' }}>✍️</span>
+                            <User size={14} style={{ position: 'absolute', left: '12px' }} />
                             <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '140px' }}>
                                 {filterAuthor === 'ALL' ? 'Todos los Autores' : filterAuthor}
                             </span>
@@ -365,7 +367,7 @@ function Library() {
                                 top: 'calc(100% + 8px)',
                                 left: 0,
                                 minWidth: '200px',
-                                backgroundColor: 'var(--card-bg)',
+                                backgroundColor: 'var(--bg-primary, #1e293b)', // ensure opaque
                                 border: '1px solid var(--border-color)',
                                 borderRadius: '12px',
                                 boxShadow: 'var(--shadow-lg)',
@@ -379,7 +381,8 @@ function Library() {
                                     onClick={(e) => { e.stopPropagation(); setFilterAuthor('ALL'); setOpenAuthorDropdown(false); }}
                                     className="dropdown-item"
                                     style={{
-                                        padding: '8px 12px',
+                                        padding: '6px 12px',
+                                        marginBottom: '2px',
                                         borderRadius: '8px',
                                         cursor: 'pointer',
                                         fontSize: '0.9rem',
@@ -396,7 +399,8 @@ function Library() {
                                         onClick={(e) => { e.stopPropagation(); setFilterAuthor(a); setOpenAuthorDropdown(false); }}
                                         className="dropdown-item"
                                         style={{
-                                            padding: '8px 12px',
+                                            padding: '6px 12px',
+                                            marginBottom: '2px',
                                             borderRadius: '8px',
                                             cursor: 'pointer',
                                             fontSize: '0.9rem',

@@ -67,6 +67,7 @@ const Sidebar = ({ isOpen, isCollapsed, toggleCollapse, closeMobileSidebar }) =>
                                 alt="LibroVerse"
                                 style={{
                                     height: '40px',
+                                    width: 'auto',
                                     objectFit: 'contain',
                                     filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
                                 }}
@@ -105,6 +106,7 @@ const Sidebar = ({ isOpen, isCollapsed, toggleCollapse, closeMobileSidebar }) =>
                             alt="LV"
                             style={{
                                 height: '32px',
+                                width: 'auto',
                                 objectFit: 'contain',
                                 marginLeft: '8px'
                             }}
