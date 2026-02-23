@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { User, Lock, Mail, BookOpen } from 'lucide-react';
+import { User, Lock, Mail, BookOpen, Eye, EyeOff } from 'lucide-react';
 
 const AuthPage = () => {
     const location = useLocation();
@@ -29,6 +29,7 @@ const AuthPage = () => {
     const [loginPassword, setLoginPassword] = useState('');
     const [loginError, setLoginError] = useState('');
     const [loginLoading, setLoginLoading] = useState(false);
+    const [showLoginPassword, setShowLoginPassword] = useState(false);
 
     // --- Register State ---
     const [regName, setRegName] = useState('');
@@ -36,6 +37,7 @@ const AuthPage = () => {
     const [regPassword, setRegPassword] = useState('');
     const [regError, setRegError] = useState('');
     const [regLoading, setRegLoading] = useState(false);
+    const [showRegPassword, setShowRegPassword] = useState(false);
 
     const { login, register } = useAuth();
 
@@ -202,7 +204,7 @@ const AuthPage = () => {
                                 <div style={{ position: 'relative' }}>
                                     <Lock size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#6b7280' }} />
                                     <input
-                                        type="password"
+                                        type={showLoginPassword ? "text" : "password"}
                                         value={loginPassword}
                                         onChange={(e) => setLoginPassword(e.target.value)}
                                         placeholder="Contraseña"
@@ -211,6 +213,12 @@ const AuthPage = () => {
                                         onBlur={handleBlur}
                                         required
                                     />
+                                    <div
+                                        style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', color: '#9ca3af', cursor: 'pointer', display: 'flex' }}
+                                        onClick={() => setShowLoginPassword(!showLoginPassword)}
+                                    >
+                                        {showLoginPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                    </div>
                                 </div>
                                 <button
                                     type="submit"
@@ -286,7 +294,7 @@ const AuthPage = () => {
                                 <div style={{ position: 'relative' }}>
                                     <Lock size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#6b7280' }} />
                                     <input
-                                        type="password"
+                                        type={showRegPassword ? "text" : "password"}
                                         value={regPassword}
                                         onChange={(e) => setRegPassword(e.target.value)}
                                         placeholder="Contraseña"
@@ -295,6 +303,12 @@ const AuthPage = () => {
                                         onBlur={handleBlur}
                                         required
                                     />
+                                    <div
+                                        style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', color: '#9ca3af', cursor: 'pointer', display: 'flex' }}
+                                        onClick={() => setShowRegPassword(!showRegPassword)}
+                                    >
+                                        {showRegPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                    </div>
                                 </div>
 
                                 <button
@@ -393,7 +407,7 @@ const AuthPage = () => {
                     }}>
                         <h2 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>¡Bienvenido de Nuevo!</h2>
                         <p style={{ fontSize: '1.1rem', opacity: 0.9, maxWidth: '80%' }}>
-                            Para mantenerte conectado con nosotros, por favor inicia sesión con tu información personal
+                            Inicia sesión y sigue con tus aventuras literarias
                         </p>
                     </div>
 
@@ -449,24 +463,32 @@ const AuthPage = () => {
 
 const inputStyle = {
     width: '100%',
-    padding: '12px 16px 12px 44px',
-    borderRadius: '30px',
-    border: '1px solid var(--border-color)',
-    backgroundColor: 'var(--bg-primary)',
+    padding: '14px 16px 14px 44px',
+    borderRadius: '12px',
+    border: '1.5px solid rgba(139, 92, 246, 0.15)',
+    backgroundColor: 'rgba(139, 92, 246, 0.03)',
     color: 'var(--text-primary)',
     fontSize: '0.95rem',
     outline: 'none',
-    transition: 'border-color 0.2s, box-shadow 0.2s'
+    transition: 'all 0.3s ease'
 };
 
 const handleFocus = (e) => {
     e.target.style.borderColor = 'var(--accent-primary)';
-    e.target.style.boxShadow = '0 0 0 2px rgba(139, 92, 246, 0.2)';
+    e.target.style.backgroundColor = 'var(--bg-primary)';
+    e.target.style.boxShadow = '0 0 0 4px rgba(139, 92, 246, 0.15), 0 4px 12px rgba(0,0,0,0.05)';
+    if (e.target.previousElementSibling) {
+        e.target.previousElementSibling.style.color = 'var(--accent-primary)';
+    }
 };
 
 const handleBlur = (e) => {
-    e.target.style.borderColor = 'var(--border-color)';
+    e.target.style.borderColor = 'rgba(139, 92, 246, 0.15)';
+    e.target.style.backgroundColor = 'rgba(139, 92, 246, 0.03)';
     e.target.style.boxShadow = 'none';
+    if (e.target.previousElementSibling) {
+        e.target.previousElementSibling.style.color = '#6b7280';
+    }
 };
 
 export default AuthPage;
